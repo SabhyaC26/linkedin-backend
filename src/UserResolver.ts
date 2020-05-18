@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
 import { User } from "./entity/User";
 import { hash } from "bcryptjs";
-import * as EmailValidator from 'email-validator';
+import * as EmailValidator from "email-validator";
 
 @Resolver()
 export class UserResolver {
@@ -11,7 +11,13 @@ export class UserResolver {
     return "hey cutie ;)";
   }
 
-  // add new user
+  // query to get all users
+  @Query(() => [User])
+  users() {
+    return User.find();
+  }
+
+  // mutation to add new user
   @Mutation(() => Boolean)
   async register(
     @Arg("email") email: string,
@@ -20,18 +26,22 @@ export class UserResolver {
     @Arg("firstName") firstName: string,
     @Arg("lastName") lastName: string
   ) {
+    if (password !== confirmPasswword) {
+      throw new Error("Passwords do not match!");
+    }
+
+    if (!EmailValidator.validate(email)) {
+      throw new Error("Invalid email!");
+    }
+
     try {
-
-      if (password === confirmPasswword) {
-        const hashedPassword = await hash(password, 12);
-        const user = new User();
-
-        user.email = email;
-        user.password = hashedPassword;
-        user.firstName = firstName;
-        user.lastName = lastName;
-        await User.save(user);
-      }
+      const hashedPassword = await hash(password, 12);
+      const user = new User();
+      user.email = email;
+      user.password = hashedPassword;
+      user.firstName = firstName;
+      user.lastName = lastName;
+      await User.save(user);
     } catch (err) {
       console.log(err);
       return false;
