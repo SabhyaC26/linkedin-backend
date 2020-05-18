@@ -21,13 +21,16 @@ export class User extends BaseEntity {
     @Column("varchar", { length: 255, unique: true })
     email: string
 
+    @Column("boolean", { default: false })
+    verified: boolean
+
     @Column("text")
     password: string
 
-    @Column("varchar", { length: 255, nullable: true })
+    @Column("varchar", { length: 255 })
     firstName: string;
 
-    @Column("varchar", { length: 255, nullable: true })
+    @Column("varchar", { length: 255 })
     lastName: string;
 
     @Column("integer", { nullable: true })

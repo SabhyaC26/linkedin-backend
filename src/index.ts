@@ -12,6 +12,7 @@ import { createConnection } from "typeorm";
         res.send("hello");
     });
 
+
     await createConnection();
 
     const apolloServer = new ApolloServer({
