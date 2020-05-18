@@ -7,7 +7,7 @@ import {
     BeforeInsert,
 } from "typeorm";
 
-import uuidv4 from "uuid/v4";
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
 export class User extends BaseEntity {
@@ -24,19 +24,19 @@ export class User extends BaseEntity {
     @Column("text")
     password: string
 
-    @Column("varchar", { length: 255 })
+    @Column("varchar", { length: 255, nullable: true })
     firstName: string;
 
-    @Column("varchar", { length: 255 })
+    @Column("varchar", { length: 255, nullable: true })
     lastName: string;
 
-    @Column("date")
-    birthday: Date;
+    @Column("integer", { nullable: true })
+    age: number;
 
-    @Column()
+    @Column("varchar", { length: 255, nullable: true })
     loacation: string;
 
-    @Column("simple-array")
+    @Column("simple-array", { nullable: true })
     companies: string[];
 
     @BeforeInsert()
