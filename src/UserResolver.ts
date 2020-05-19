@@ -26,14 +26,17 @@ export class UserResolver {
     @Arg("firstName") firstName: string,
     @Arg("lastName") lastName: string
   ) {
+    // check if passwords match
     if (password !== confirmPasswword) {
       throw new Error("Passwords do not match!");
     }
 
+    // check if the email is valid
     if (!EmailValidator.validate(email)) {
       throw new Error("Invalid email!");
     }
 
+    // try to add the user to the DB
     try {
       const hashedPassword = await hash(password, 12);
       const user = new User();
