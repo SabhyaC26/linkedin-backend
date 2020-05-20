@@ -9,6 +9,7 @@ import {
 
 import { v4 as uuidv4 } from "uuid";
 import { ObjectType, Field, Int } from "type-graphql";
+import { MinLength, MaxLength, IsAlphanumeric, IsEmail } from "class-validator";
 
 @ObjectType()
 @Entity()
@@ -23,6 +24,7 @@ export class User extends BaseEntity {
 
   @Field()
   @Column("varchar", { length: 255, unique: true })
+  @IsEmail()
   email: string;
 
   @Field()
@@ -30,6 +32,9 @@ export class User extends BaseEntity {
   verified: boolean;
 
   @Column("text")
+  @MinLength(8)
+  @MaxLength(26)
+  @IsAlphanumeric()
   password: string;
 
   @Field()
