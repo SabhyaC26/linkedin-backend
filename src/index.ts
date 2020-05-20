@@ -21,7 +21,7 @@ import * as nodemailer from "nodemailer";
       secure: false, // upgrade later with STARTTLS
       auth: {
         user: "sabhyachhabria@gmail.com",
-        pass: "dagikblinctgycyp",
+        pass: "",
       },
     });
     var mailOptions = {
