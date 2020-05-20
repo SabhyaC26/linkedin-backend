@@ -5,9 +5,11 @@ import { buildSchema } from "type-graphql";
 import { UserResolver } from "./UserResolver";
 import { createConnection } from "typeorm";
 import * as nodemailer from "nodemailer";
+import * as dotenv from "dotenv";
 
 (async () => {
   const app = express();
+  dotenv.config();
 
   app.get("/", (_req, res) => {
     res.send("hello");
@@ -21,14 +23,14 @@ import * as nodemailer from "nodemailer";
       secure: false, // upgrade later with STARTTLS
       auth: {
         user: "sabhyachhabria@gmail.com",
-        pass: "",
+        pass: process.env.GMAIL_KEY,
       },
     });
     var mailOptions = {
       from: "sabhyachhabria@gmail.com",
       to: "sabhyachhabria@gmail.com",
       subject: "Hello",
-      text: "Hello from node.js",
+      text: "test email 2",
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
