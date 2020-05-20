@@ -15,8 +15,14 @@ export class UserResolver {
 
   // query to get all users
   @Query(() => [User])
-  users() {
-    return User.find();
+  async users() {
+    return await User.find();
+  }
+
+  // query to find user by id
+  @Query(() => User)
+  async user(@Arg("id") id: string) {
+    return await User.findOne(id);
   }
 
   // mutation to add new user
