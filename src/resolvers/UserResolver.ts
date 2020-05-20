@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import { User } from "./entity/User";
+import { User } from "../entity/User";
 import { hash } from "bcryptjs";
 import * as EmailValidator from "email-validator";
 import { validate } from "class-validator";
