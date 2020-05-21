@@ -6,6 +6,7 @@ import { UserResolver } from "./resolvers/UserResolver";
 import { createConnection } from "typeorm";
 import * as nodemailer from "nodemailer";
 import * as dotenv from "dotenv";
+import { AuthResolver } from "./resolvers/AuthResolver";
 
 (async () => {
   const app = express();
@@ -46,7 +47,7 @@ import * as dotenv from "dotenv";
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver],
+      resolvers: [UserResolver, AuthResolver],
     }),
   });
 
