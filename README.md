@@ -2,9 +2,4 @@
 
 This is a barebones clone for a backend for LinkedIn!
 
-Current status:
-- register user done
-
-Next to do:
-- verify email address (node-mailer)
-- use jwt for sign in
+See project status + notes: https://www.notion.so/LinkedIn-Backend-Clone-0f32ddf1e3fd4041b4847e70bbaaf4d8
