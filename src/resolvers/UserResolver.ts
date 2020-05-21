@@ -1,4 +1,4 @@
-import { Resolver, Query, Arg } from "type-graphql";
+import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import { User } from "../entity/User";
 
 @Resolver()
@@ -12,6 +12,19 @@ export class UserResolver {
   // query to find user by id
   @Query(() => User)
   async user(@Arg("id") id: string) {
-    return await User.findOne(id);
+    const user = await User.findOne(id);
+    if (!user) {
+      throw new Error("User not found!");
+    }
+    return user;
   }
+
+  // mutation to change user email
+  // @Mutation()
+  // async updateUserEmail(
+  //   @Arg("id") id: string,
+  //   @Arg("newEmail") newEmail: string
+  // ) {
+
+  // }
 }
