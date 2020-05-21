@@ -46,7 +46,7 @@ export class AuthResolver {
       user.firstName = firstName;
       user.lastName = lastName;
       // run validation checks and save user
-      const errors = await validate(this.users);
+      const errors = await validate(user);
       if (errors.length > 0) {
         console.log(errors);
         throw new Error("Validation checks on user failed!");

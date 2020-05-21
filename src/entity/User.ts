@@ -48,7 +48,7 @@ export class User extends BaseEntity {
 
   @Field()
   @Column("varchar", { length: 255, default: "location" })
-  loacation: string;
+  location: string;
 
   @Field(() => [String])
   @Column("simple-array", { default: [] })
