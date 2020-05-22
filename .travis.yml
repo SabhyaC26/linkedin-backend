@@ -1,4 +1,4 @@
-sudo: false
+dist: osx
 
 language: node_js
 
