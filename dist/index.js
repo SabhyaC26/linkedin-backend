@@ -78,7 +78,7 @@ const AuthResolver_1 = require("./resolvers/AuthResolver");
         }),
     });
     apolloServer.applyMiddleware({ app });
-    const port = 8000;
+    const port = 8080;
     app.listen(port, () => {
         console.log(`server started on port ${port}`);
     });

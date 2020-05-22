@@ -22,7 +22,7 @@ export class UserResolver {
   }
 
   // mutation to change user email
-  @Mutation()
+  @Mutation(() => Boolean)
   async updateUserEmail(
     @Arg("id") id: string,
     @Arg("newEmail") newEmail: string
@@ -40,10 +40,11 @@ export class UserResolver {
     } else {
       getManager().save(user);
     }
+    return true;
   }
 
   // mutation to change user firstName
-  @Mutation()
+  @Mutation(() => Boolean)
   async updateUserfirstName(
     @Arg("id") id: string,
     @Arg("newfirstName") newfirstName: string
@@ -61,10 +62,11 @@ export class UserResolver {
     } else {
       getManager().save(user);
     }
+    return true;
   }
 
   // mutation to change user lastName
-  @Mutation()
+  @Mutation(() => Boolean)
   async updateUserlastName(
     @Arg("id") id: string,
     @Arg("newlastName") newlastName: string
@@ -82,10 +84,11 @@ export class UserResolver {
     } else {
       getManager().save(user);
     }
+    return true;
   }
 
   // mutation to change user Location
-  @Mutation()
+  @Mutation(() => Boolean)
   async updateUserLocation(
     @Arg("id") id: string,
     @Arg("newLocation") newLocation: string
@@ -103,5 +106,6 @@ export class UserResolver {
     } else {
       getManager().save(user);
     }
+    return true;
   }
 }

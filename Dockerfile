@@ -15,5 +15,15 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+# Build code (TS --> JS)
+RUN npm run build
+
+# Copy important files over to dist
+COPY ormconfig.json ./dist
+COPY .env ./dist
+
+# Change working directory
+WORKDIR ./dist
+
 EXPOSE 8080
-CMD [ "node", "server.js" ]
+CMD node index.js
