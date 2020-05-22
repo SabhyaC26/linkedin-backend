@@ -6,7 +6,7 @@ node_js:
   - node
 
 install:
-  - npm ci (npm audit)
+  - npm install (npm audit)
 
 script:
   - npm test
