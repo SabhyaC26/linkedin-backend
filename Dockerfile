@@ -6,7 +6,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# part 2 -
+# part 2 - build without dev dependencies
 FROM node as runner
 WORKDIR /usr/app
 COPY package*.json ./
