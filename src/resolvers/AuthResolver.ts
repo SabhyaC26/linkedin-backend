@@ -3,7 +3,7 @@ import { hash } from "bcryptjs";
 import { User } from "../entity/User";
 import * as EmailValidator from "email-validator";
 import { validate } from "class-validator";
-import { getManager } from "typeorm";
+import { getManager, Equal } from "typeorm";
 
 @Resolver()
 export class AuthResolver {
@@ -57,6 +57,15 @@ export class AuthResolver {
       console.log(err);
       return false;
     }
+    return true;
+  }
+
+  @Mutation(() => Boolean)
+  async login(@Arg("email") email: string, @Arg("password") password: string) {
+    var user = await User.find({
+      where: { email: Equal(email) },
+    });
+
     return true;
   }
 }
