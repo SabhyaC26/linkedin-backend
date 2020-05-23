@@ -3,7 +3,7 @@ import { hash } from "bcryptjs";
 import { User } from "../entity/User";
 import * as EmailValidator from "email-validator";
 import { validate } from "class-validator";
-import { getManager, Equal } from "typeorm";
+import { getManager } from "typeorm";
 
 @Resolver()
 export class AuthResolver {
@@ -12,21 +12,24 @@ export class AuthResolver {
   async register(
     @Arg("email") email: string,
     @Arg("password") password: string,
-    @Arg("confirmPassword") confirmPasswword: string,
+    @Arg("confirmPassword") confirmPassword: string,
     @Arg("firstName") firstName: string,
     @Arg("lastName") lastName: string
   ) {
     // check if passwords match
-    if (password !== confirmPasswword) {
+    if (password !== confirmPassword) {
       throw new Error("Passwords do not match!");
     }
 
     // check passowrd meets requirements
-    const passwordRegex = RegExp("^(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,36}$");
-    if (!passwordRegex.test(password)) {
+    var strongRegex = new RegExp(
+      "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+    );
+    if (!strongRegex.test(password)) {
       throw new Error(
-        "Password must be between 8-36 chars and and must include at least\
-         one upper case letter, one lower case letter, and one numeric digit."
+        "Password must be at least 8 chars and and must include at least\
+         one upper case letter, one lower case letter, one numeric digit,\
+         and one special character."
       );
     }
 
@@ -60,12 +63,8 @@ export class AuthResolver {
     return true;
   }
 
-  @Mutation(() => Boolean)
-  async login(@Arg("email") email: string, @Arg("password") password: string) {
-    var user = await User.find({
-      where: { email: Equal(email) },
-    });
-
-    return true;
-  }
+  // @Mutation(() => Boolean)
+  // async login(@Arg("email") email: string, @Arg("password") password: string) {
+  //   return true;
+  // }
 }
