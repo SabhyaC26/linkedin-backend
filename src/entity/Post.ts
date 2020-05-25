@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 
 import { v4 as uuidv4 } from "uuid";
-import { ObjectType, Field, Int } from "type-graphql";
+import { ObjectType, Field } from "type-graphql";
 import { User } from "./User";
 
 @ObjectType()
@@ -17,4 +17,25 @@ export class Post extends BaseEntity {
   @Field()
   @PrimaryColumn("uuid")
   id: String;
+
+  @Field()
+  @CreateDateColumn()
+  created_at: Date;
+
+  @Field()
+  @Column()
+  user: User;
+
+  @Field()
+  @Column()
+  title: string;
+
+  @Field()
+  @Column()
+  body: string;
+
+  @BeforeInsert()
+  assignUserId() {
+    this.id = uuidv4();
+  }
 }
